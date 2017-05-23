@@ -1,6 +1,7 @@
 package ness.edu.innerclassesandcollections;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton fab;
@@ -28,6 +36,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fab.setOnClickListener(this);
 
+        Toast.makeText(this, "" + "avi".hashCode()
+                , Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, "" + "via".hashCode()
+                , Toast.LENGTH_SHORT).show();
+
+
+        HashSet<Person> people = new HashSet<>();
+        people.add(new Person());
+
+
+        String[] arr = {"a", "b", "c"};
+        String s = Arrays.toString(arr);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, Arrays.toString(arr), Toast.LENGTH_SHORT).show();
+
+        List<String> strings = Arrays.asList(arr);
+
+        String[] lines = new String[10];
+        Arrays.fill(lines, "*");
+
+
+
+        Queue<String> l = new LinkedList<>();
 
 
     }
@@ -77,30 +110,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(this, newHouse.toString(), Toast.LENGTH_SHORT).show();
 
-        final int x = 10;
-        //inner class inside a method:
-        class MyFirstClickListener implements View.OnClickListener{
+        fab.setOnClickListener(new View.OnClickListener() {
+            private String s = "123";
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, x + "", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "First", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, this.getClass().getName(), Toast.LENGTH_SHORT).show();
             }
-        }
-
-
-        class MySecondClickListener implements View.OnClickListener{
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Second", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        fab.setOnClickListener(new MyFirstClickListener());
-        toolbar.setOnClickListener(new MySecondClickListener());
-
-
+        });
     }
-
 
     public static class MyFragment{
         //No Reference to the outer class.

@@ -1,5 +1,7 @@
 package ness.edu.innerclassesandcollections;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  */
 
 //Class in a class
-public class House {
+public class House  {
     private String address;
 
     private ArrayList<Room> rooms = new ArrayList<>();
@@ -18,6 +20,8 @@ public class House {
     private House() {
         //new Room(10, 10);
     }
+
+
 
     public static class Builder{
         private House h;
