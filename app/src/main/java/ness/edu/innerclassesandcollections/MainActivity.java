@@ -3,14 +3,16 @@ package ness.edu.innerclassesandcollections;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton fab;
     String name;
     @Override
@@ -20,19 +22,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
-        //instantiation:
-
-        //1) init a house is easy:
-        House h = new House("Ehad haam 8");
-
-        //2) init a room from outside
-        //requires a special syntax
-        //the syntax requires an instance of a house
-        //in order to create a room.
-        House.Room room = h.new Room(10,10);
+        fab.setOnClickListener(this);
 
 
 
@@ -57,6 +49,36 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Title").
+                setMessage("").
+                setPositiveButton("", null);
+
+        AlertDialog alertDialog = builder.create();
+
+
+
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+    @Override
+    public void onClick(View v) {
+        House.Builder b = new House.Builder();
+        House newHouse = b.addRoom(10, 10).
+                addRoom(20, 20).
+                addRoom(10, 3).
+                addRoom(10, 10) .
+                setAddress("Ehad haam").build();
+
+        Toast.makeText(this, newHouse.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
+    public static class MyFragment{
+        //No Reference to the outer class.
+        //No ref to MainActivity.this
     }
 }
